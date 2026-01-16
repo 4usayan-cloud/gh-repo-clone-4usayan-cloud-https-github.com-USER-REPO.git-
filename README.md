@@ -1,4 +1,4 @@
-# gh-repo-clone-4usayan-cloud-https-github.com-USER-REPO.git-
+# Project Setup Guide
 
 ## Setup Instructions
 
@@ -8,8 +8,10 @@ If you need to change the git remote origin to point to your own repository (e.g
 
 1. **Navigate to your project directory:**
    ```bash
-   cd /Users/sayansen/Desktop/resilience_map_source
+   cd /path/to/your/project
    ```
+   
+   Replace `/path/to/your/project` with the actual path to your local project directory (e.g., `/Users/sayansen/Desktop/resilience_map_source`).
 
 2. **Remove the existing remote origin:**
    ```bash
