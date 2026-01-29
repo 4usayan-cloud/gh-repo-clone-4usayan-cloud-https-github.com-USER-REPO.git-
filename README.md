@@ -1,6 +1,6 @@
 # gh-repo-clone-4usayan-cloud-https-github.com-USER-REPO.git-
 
-This repository contains comprehensive documentation and guides for Git workflows and repository management.
+This repository contains comprehensive documentation and guides for Git workflows, repository management, and code examples.
 
 ## Documentation
 
@@ -13,6 +13,14 @@ This repository contains comprehensive documentation and guides for Git workflow
   - Adding and managing remote repositories
   - Branch renaming and troubleshooting
 - **[Git Workflow Guide](GIT_WORKFLOW_GUIDE.md)** - Complete guide for clone → change → add → commit → push workflow
+
+## Examples
+
+- **[Real-time Dashboard](examples/dashboard/)** - JavaScript Fetch API example
+  - Async data fetching with error handling
+  - Auto-refresh functionality using setInterval
+  - Responsive dashboard UI
+  - [View Example](examples/dashboard/index.html) | [Read Documentation](examples/dashboard/README.md)
 
 ## Quick Start
 
