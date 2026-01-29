@@ -6,17 +6,34 @@ This repository contains comprehensive Git documentation and interactive code ex
 
 ## 🌐 Live Deployment
 
-✅ **Site is LIVE:** Visit at your Netlify URL after deployment  
-✅ **Backend APIs Working:** All serverless functions running  
+✅ **Multiple Deployment Options:** GitHub Pages, Netlify, or Vercel  
+✅ **Backend APIs Working:** All serverless functions running (Netlify/Vercel)  
 ✅ **Auto-Refresh Data:** Real-time updates every 30 seconds  
 ✅ **Full CORS Support:** API accessible from any origin  
 
-**[⚡ QUICK START](QUICK_START.md)** - Deploy in 3 commands!  
-**[📖 Full Deployment Guide](DEPLOYMENT.md)** - Complete documentation
+**Deploy Options:**
+- **[🔵 GitHub Pages](GITHUB_DEPLOYMENT.md)** - Free static hosting (frontend only)
+- **[⚡ Netlify](QUICK_START.md)** - Full-stack with serverless functions
+- **[📖 Full Guide](DEPLOYMENT.md)** - Complete deployment documentation
 
 ## 🚀 Quick Start
 
-### Deploy to the Internet
+### Option 1: Deploy to GitHub Pages (Static Frontend)
+
+```bash
+# Push to your GitHub repository
+git push origin main
+
+# Enable GitHub Pages in repository Settings → Pages
+# Source: GitHub Actions
+
+# Your site will be live at:
+# https://<username>.github.io/<repo-name>/
+```
+
+**Note:** GitHub Pages is static-only. For backend APIs, use Netlify or Vercel.
+
+### Option 2: Deploy to Netlify (Full-Stack with APIs)
 
 ```bash
 # Install Netlify CLI
@@ -53,6 +70,7 @@ Once deployed, these endpoints are available:
 
 ## 📚 Documentation
 
+- **[🔵 GitHub Deployment](GITHUB_DEPLOYMENT.md)** - 🆕 **Deploy on GitHub Pages** (free static hosting)
 - **[Git Clone Guide](GIT_CLONE_GUIDE.md)** - Complete guide for cloning repositories
   - HTTPS vs SSH cloning methods
   - Clone options: shallow clone, specific branch, submodules
@@ -63,7 +81,7 @@ Once deployed, these endpoints are available:
   - Branch renaming and troubleshooting
 - **[Git Workflow Guide](GIT_WORKFLOW_GUIDE.md)** - Complete guide for clone → change → add → commit → push workflow
 - **[Deployment Guide](DEPLOYMENT.md)** - 🌐 **Deploy to internet with working APIs**
-  - Quick deployment options (Netlify CLI, Git, drag & drop)
+  - Quick deployment options (GitHub Pages, Netlify CLI, Git, drag & drop)
   - Architecture overview
   - API endpoint documentation
   - Local development setup

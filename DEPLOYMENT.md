@@ -4,6 +4,7 @@ Complete guide to deploy this full-stack application with working frontend and b
 
 ## 📋 Table of Contents
 
+- [Quick Deploy to GitHub Pages](#quick-deploy-to-github-pages)
 - [Quick Deploy to Netlify](#quick-deploy-to-netlify)
 - [What Gets Deployed](#what-gets-deployed)
 - [Architecture Overview](#architecture-overview)
@@ -11,6 +12,42 @@ Complete guide to deploy this full-stack application with working frontend and b
 - [Local Development](#local-development)
 - [Environment Variables](#environment-variables)
 - [Troubleshooting](#troubleshooting)
+
+---
+
+## 🎯 Quick Deploy to GitHub Pages
+
+GitHub Pages is perfect for hosting the **frontend** of this application (free and easy). However, it doesn't support serverless functions, so backend APIs would need to be deployed separately.
+
+### Step 1: Enable GitHub Pages
+
+1. Go to your repository on GitHub
+2. Click **Settings** → **Pages**
+3. Under "Build and deployment":
+   - Source: Select **GitHub Actions**
+4. Click **Save**
+
+### Step 2: Push Your Code
+
+```bash
+git push origin main
+```
+
+The GitHub Actions workflow (`.github/workflows/deploy.yml`) will automatically deploy your site!
+
+### Step 3: Access Your Site
+
+```
+https://<your-username>.github.io/<repository-name>/
+```
+
+**📚 For complete GitHub deployment guide, see [GITHUB_DEPLOYMENT.md](./GITHUB_DEPLOYMENT.md)**
+
+### GitHub Pages Limitations
+
+- ✅ **Frontend works:** All HTML/CSS/JS examples
+- ❌ **No backend APIs:** GitHub Pages is static-only
+- 💡 **Solution:** Deploy frontend on GitHub Pages + backend on Netlify
 
 ---
 
