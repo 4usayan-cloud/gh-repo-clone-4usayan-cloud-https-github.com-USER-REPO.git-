@@ -4,12 +4,34 @@ This repository contains comprehensive documentation and guides for Git workflow
 
 ## Documentation
 
+- **[Git Setup Guide](GIT_SETUP_GUIDE.md)** - Complete guide for initial repository setup and pushing to remote
+  - Initial push workflow: `git remote add origin`, `git branch -M main`, `git push -u origin main`
+  - Adding and managing remote repositories
+  - Branch renaming and troubleshooting
 - **[Git Workflow Guide](GIT_WORKFLOW_GUIDE.md)** - Complete guide for clone → change → add → commit → push workflow
-- [Git Setup Guide](GIT_SETUP_GUIDE.md) - Learn how to add remote repositories using `git remote add origin`
 
 ## Quick Start
 
-New to Git? Start here with the basic workflow:
+### For New Repositories (Initial Setup)
+
+Pushing a new local repository to GitHub for the first time:
+
+```bash
+# 1. Add remote repository
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+
+# 2. Rename branch to 'main' 
+git branch -M main
+
+# 3. Push and set up tracking
+git push -u origin main
+```
+
+See [Git Setup Guide](GIT_SETUP_GUIDE.md) for detailed explanations.
+
+### For Existing Repositories (Daily Workflow)
+
+Working with an existing cloned repository:
 
 ```bash
 # 1. Clone a repository
