@@ -11,7 +11,8 @@ This repository contains comprehensive Git documentation and interactive code ex
 ✅ **Auto-Refresh Data:** Real-time updates every 30 seconds  
 ✅ **Full CORS Support:** API accessible from any origin  
 
-**[📖 Full Deployment Guide](DEPLOYMENT.md)** - Deploy your own copy in 5 minutes!
+**[⚡ QUICK START](QUICK_START.md)** - Deploy in 3 commands!  
+**[📖 Full Deployment Guide](DEPLOYMENT.md)** - Complete documentation
 
 ## 🚀 Quick Start
 
