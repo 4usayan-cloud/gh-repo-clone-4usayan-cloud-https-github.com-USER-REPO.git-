@@ -36,6 +36,20 @@ This repository contains comprehensive documentation and guides for Git workflow
   - Comprehensive unit tests
   - [Read Documentation](examples/python-resilience-calculator/README.md)
 
+- **[Dynamic Data Renderer](examples/dynamic-data-renderer/)** - Vanilla JavaScript dynamic rendering
+  - Render mock data dynamically with JavaScript
+  - Add, delete, filter, and sort items
+  - Interactive controls and real-time updates
+  - No framework dependencies
+  - [View Example](examples/dynamic-data-renderer/index.html) | [Read Documentation](examples/dynamic-data-renderer/README.md)
+
+- **[React Data Fetcher](examples/react-data-fetcher/)** - React hooks data fetching pattern
+  - Fetch data using useState and useEffect hooks
+  - Loading and error state management
+  - Mock API for demonstration
+  - Best practices for React data fetching
+  - [View Demo](examples/react-data-fetcher/demo.html) | [Read Documentation](examples/react-data-fetcher/README.md)
+
 ## Quick Start
 
 ### Cloning an Existing Repository
