@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Contact Form - Demo</title>
+    <link rel="stylesheet" href="ContactForm.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .demo-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .demo-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .demo-info {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .demo-info h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        
+        .demo-info ul {
+            line-height: 1.8;
+            color: #666;
+        }
+        
+        .code-note {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .code-note code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>React Contact Form</h1>
+            <p>Demo with Validation & Error Handling</p>
+        </div>
+        
+        <div class="demo-info">
+            <h3>About This Demo</h3>
+            <p>This is a static HTML demonstration of the React Contact Form component. In a real React application, this would be a fully functional component.</p>
+            
+            <h4>Features:</h4>
+            <ul>
+                <li>✅ Form validation (name, email, message)</li>
+                <li>✅ Real-time error feedback</li>
+                <li>✅ Async form submission with fetch API</li>
+                <li>✅ Loading states during submission</li>
+                <li>✅ Success and error messages</li>
+                <li>✅ Responsive design</li>
+            </ul>
+            
+            <div class="code-note">
+                <strong>Note:</strong> This is a visual demonstration. To use this in your React application, 
+                import the <code>ContactForm.jsx</code> component and ensure you have React and React hooks set up.
+            </div>
+        </div>
+        
+        <!-- Static HTML representation of the React form -->
+        <div class="contact-form-container">
+            <h2>Contact Us</h2>
+            
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('This is a demo. In a real React app, the form would submit to your API.');">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Your name"
+                        required
+                    />
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="your.email@example.com"
+                        required
+                    />
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Your message..."
+                        rows="5"
+                        required
+                    ></textarea>
+                </div>
+                
+                <button type="submit" class="submit-button">
+                    Send Message
+                </button>
+            </form>
+        </div>
+        
+        <div class="demo-info" style="margin-top: 30px;">
+            <h3>Integration Guide</h3>
+            <p>To use this component in your React application:</p>
+            <ol style="line-height: 1.8; color: #666;">
+                <li>Copy <code>ContactForm.jsx</code> to your components directory</li>
+                <li>Import the CSS file: <code>import './ContactForm.css'</code></li>
+                <li>Import and use the component: <code>&lt;ContactForm /&gt;</code></li>
+                <li>Update the API endpoint in the fetch call to match your backend</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
