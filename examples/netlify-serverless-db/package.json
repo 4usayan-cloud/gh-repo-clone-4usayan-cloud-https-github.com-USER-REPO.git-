@@ -17,5 +17,8 @@
   "license": "MIT",
   "devDependencies": {
     "netlify-cli": "^17.0.0"
+  },
+  "dependencies": {
+    "lowdb": "^7.0.1"
   }
 }

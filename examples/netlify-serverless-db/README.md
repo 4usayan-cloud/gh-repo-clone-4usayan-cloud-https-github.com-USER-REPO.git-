@@ -8,10 +8,12 @@ This example implements a serverless function that acts as a simple database API
 
 ## Files
 
-- **functions/db.js** - Serverless function handling GET/POST requests
+- **functions/db.js** - Basic serverless function handling GET/POST requests (vanilla Node.js)
+- **functions/db-lowdb.js** - Enhanced version using lowdb library
 - **functions/data.json** - JSON file serving as the database
 - **netlify.toml** - Netlify configuration
 - **index.html** - Demo client for testing the API
+- **package.json** - Dependencies including lowdb
 - **README.md** - This documentation
 
 ## Core Implementation (from problem statement)
@@ -34,6 +36,85 @@ exports.handler = async (event) => {
     return { statusCode: 200, body: 'Updated' };
   }
 };
+```
+
+## Enhanced Version with lowdb
+
+For better JSON database management, we also provide an enhanced version using [lowdb](https://github.com/typicode/lowdb):
+
+```javascript
+// functions/db-lowdb.js
+const { Low } = require('lowdb');
+const { JSONFile } = require('lowdb/node');
+const path = require('path');
+
+// Initialize lowdb
+const dbPath = path.join(__dirname, 'data.json');
+const adapter = new JSONFile(dbPath);
+const defaultData = { items: [], lastUpdated: null };
+const db = new Low(adapter, defaultData);
+
+exports.handler = async (event) => {
+  try {
+    // Read data from JSON file
+    await db.read();
+
+    if (event.httpMethod === 'GET') {
+      return {
+        statusCode: 200,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(db.data)
+      };
+    }
+
+    if (event.httpMethod === 'POST') {
+      const newData = JSON.parse(event.body);
+      
+      // Validate data structure
+      if (!newData.items || !Array.isArray(newData.items)) {
+        return {
+          statusCode: 400,
+          body: JSON.stringify({ error: 'Invalid data format' })
+        };
+      }
+
+      // Update and write
+      db.data = {
+        items: newData.items,
+        lastUpdated: new Date().toISOString()
+      };
+      await db.write();
+
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ message: 'Updated successfully' })
+      };
+    }
+
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: 'Method not allowed' })
+    };
+
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message })
+    };
+  }
+};
+```
+
+**Benefits of using lowdb:**
+- ✅ Async/await API (non-blocking)
+- ✅ Built-in error handling
+- ✅ Better data validation
+- ✅ Cleaner, more maintainable code
+- ✅ Automatic JSON formatting
+
+**Installation:**
+```bash
+npm install lowdb
 ```
 
 ## Features
