@@ -14,7 +14,30 @@
 
 ---
 
-## Method 1: Netlify CLI (Fastest - 3 Commands)
+## Method 1: Vercel CLI ⭐ (Recommended - 3 Commands)
+
+```bash
+# 1. Install Vercel CLI
+npm install -g vercel
+
+# 2. Login to Vercel (opens browser)
+vercel login
+
+# 3. Deploy to production
+vercel --prod
+```
+
+**Done!** Your site is live at: `https://your-project.vercel.app`
+
+**Why Vercel?**
+- ✅ 6,000 build minutes/month (vs 300 on Netlify)
+- ✅ Clean `/api/*` endpoint structure
+- ✅ Built-in analytics
+- ✅ Excellent Next.js/React support
+
+---
+
+## Method 2: Netlify CLI (Alternative - 3 Commands)
 
 ```bash
 # 1. Install Netlify CLI
@@ -31,7 +54,27 @@ netlify deploy --prod
 
 ---
 
-## Method 2: GitHub + Netlify (Automatic Deployments)
+## Method 3: GitHub + Vercel (Automatic Deployments)
+
+1. **Push this repo to GitHub:**
+   ```bash
+   git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+   git push -u origin main
+   ```
+
+2. **Connect to Vercel:**
+   - Go to https://vercel.com/new
+   - Click "Import Project"
+   - Choose your GitHub repository
+   - Click "Deploy" (settings auto-detected!)
+
+3. **Automatic updates:**
+   - Every git push automatically deploys
+   - No manual intervention needed
+
+---
+
+## Method 4: GitHub + Netlify (Automatic Deployments)
 
 1. **Push this repo to GitHub:**
    ```bash

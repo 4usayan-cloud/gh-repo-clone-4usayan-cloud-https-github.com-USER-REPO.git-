@@ -6,19 +6,44 @@ This repository contains comprehensive Git documentation and interactive code ex
 
 ## 🌐 Live Deployment
 
-✅ **Multiple Deployment Options:** GitHub Pages, Netlify, or Vercel  
-✅ **Backend APIs Working:** All serverless functions running (Netlify/Vercel)  
+✅ **Multiple Deployment Options:** Vercel, Netlify, or GitHub Pages  
+✅ **Backend APIs Working:** All serverless functions running (Vercel/Netlify)  
 ✅ **Auto-Refresh Data:** Real-time updates every 30 seconds  
 ✅ **Full CORS Support:** API accessible from any origin  
 
 **Deploy Options:**
+- **[⚡ Vercel](VERCEL_DEPLOYMENT.md)** ⭐ - Full-stack with `/api/*` functions (Recommended)
+- **[🟢 Netlify](QUICK_START.md)** - Full-stack with `/.netlify/functions/*`
 - **[🔵 GitHub Pages](GITHUB_DEPLOYMENT.md)** - Free static hosting (frontend only)
-- **[⚡ Netlify](QUICK_START.md)** - Full-stack with serverless functions
 - **[📖 Full Guide](DEPLOYMENT.md)** - Complete deployment documentation
 
 ## 🚀 Quick Start
 
-### Option 1: Deploy to GitHub Pages (Static Frontend)
+### Option 1: Deploy to Vercel ⭐ (Full-Stack - Recommended)
+
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Login and deploy
+vercel login
+vercel --prod
+```
+
+**✅ Done!** Your site with working frontend + backend APIs is live at `https://your-project.vercel.app`
+
+### Option 2: Deploy to Netlify (Full-Stack Alternative)
+
+```bash
+# Install Netlify CLI
+npm install -g netlify-cli
+
+# Login and deploy
+netlify login
+netlify deploy --prod
+```
+
+### Option 3: Deploy to GitHub Pages (Static Frontend Only)
 
 ```bash
 # Push to your GitHub repository
@@ -31,20 +56,9 @@ git push origin main
 # https://<username>.github.io/<repo-name>/
 ```
 
-**Note:** GitHub Pages is static-only. For backend APIs, use Netlify or Vercel.
+**Note:** GitHub Pages is static-only. For backend APIs, use Vercel or Netlify.
 
-### Option 2: Deploy to Netlify (Full-Stack with APIs)
-
-```bash
-# Install Netlify CLI
-npm install -g netlify-cli
-
-# Login and deploy
-netlify login
-netlify deploy --prod
-```
-
-Your site with working frontend + backend will be live in seconds! See **[DEPLOYMENT.md](DEPLOYMENT.md)** for full instructions.
+See **[DEPLOYMENT.md](DEPLOYMENT.md)** for complete instructions on all deployment options.
 
 ### Local Development
 
@@ -70,7 +84,10 @@ Once deployed, these endpoints are available:
 
 ## 📚 Documentation
 
-- **[🔵 GitHub Deployment](GITHUB_DEPLOYMENT.md)** - 🆕 **Deploy on GitHub Pages** (free static hosting)
+- **[⚡ Vercel Deployment](VERCEL_DEPLOYMENT.md)** - 🆕 **Deploy on Vercel** (full-stack, recommended)
+- **[🟢 Netlify Deployment](QUICK_START.md)** - Deploy on Netlify (full-stack)
+- **[🔵 GitHub Deployment](GITHUB_DEPLOYMENT.md)** - Deploy on GitHub Pages (static hosting)
+- **[📖 Complete Deployment Guide](DEPLOYMENT.md)** - All deployment options compared
 - **[Git Clone Guide](GIT_CLONE_GUIDE.md)** - Complete guide for cloning repositories
   - HTTPS vs SSH cloning methods
   - Clone options: shallow clone, specific branch, submodules

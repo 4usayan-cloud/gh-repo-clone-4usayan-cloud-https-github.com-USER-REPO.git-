@@ -4,14 +4,48 @@ Complete guide to deploy this full-stack application with working frontend and b
 
 ## 📋 Table of Contents
 
-- [Quick Deploy to GitHub Pages](#quick-deploy-to-github-pages)
+- [Quick Deploy to Vercel](#quick-deploy-to-vercel) ⭐ **Recommended for Full-Stack**
 - [Quick Deploy to Netlify](#quick-deploy-to-netlify)
+- [Quick Deploy to GitHub Pages](#quick-deploy-to-github-pages)
 - [What Gets Deployed](#what-gets-deployed)
 - [Architecture Overview](#architecture-overview)
 - [API Endpoints](#api-endpoints)
 - [Local Development](#local-development)
 - [Environment Variables](#environment-variables)
 - [Troubleshooting](#troubleshooting)
+
+---
+
+## 🎯 Quick Deploy to Vercel ⭐
+
+**Best for:** Full-stack applications with React/Next.js and serverless functions.
+
+Vercel provides excellent support for modern web applications with automatic HTTPS, global CDN, and serverless functions.
+
+### Three-Command Deploy:
+
+```bash
+# 1. Install Vercel CLI
+npm install -g vercel
+
+# 2. Login
+vercel login
+
+# 3. Deploy to production
+vercel --prod
+```
+
+**✅ Done!** Your site is live at `https://your-project.vercel.app`
+
+**What You Get:**
+- ✅ Full frontend deployment
+- ✅ Working backend APIs at `/api/*`
+- ✅ Automatic HTTPS
+- ✅ Global CDN
+- ✅ Auto-deploy on Git push
+- ✅ 6,000 build minutes/month (free)
+
+**📚 For complete Vercel deployment guide, see [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md)**
 
 ---
 
