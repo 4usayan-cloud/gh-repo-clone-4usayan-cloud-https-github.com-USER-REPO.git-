@@ -1,0 +1,24 @@
+{
+  "name": "netlify-serverless-db",
+  "version": "1.0.0",
+  "description": "Simple JSON database using Netlify serverless functions",
+  "scripts": {
+    "dev": "netlify dev",
+    "deploy": "netlify deploy --prod"
+  },
+  "keywords": [
+    "netlify",
+    "serverless",
+    "functions",
+    "json",
+    "database"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  },
+  "dependencies": {
+    "lowdb": "^7.0.1"
+  }
+}

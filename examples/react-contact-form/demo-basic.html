@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Contact Form - Basic Version Demo</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .demo-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, textarea {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        div[role="alert"] {
+            padding: 15px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .info {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .info h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .info p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>React Contact Form</h1>
+            <p>Basic Version - Exact Specification</p>
+        </div>
+
+        <div class="demo-container">
+            <div id="root"></div>
+        </div>
+
+        <div class="info">
+            <h3>About This Demo</h3>
+            <p>
+                This is the <span class="code">ContactFormBasic</span> component that exactly matches the specification.
+                It demonstrates a minimal React form with async submission using the Fetch API.
+            </p>
+            <br>
+            <p><strong>Features:</strong></p>
+            <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8; color: #666;">
+                <li>Uses <span class="code">FormData</span> with <span class="code">Object.fromEntries</span></li>
+                <li>Shows loading state while submitting</li>
+                <li>Displays success message on completion</li>
+                <li>No headers in fetch request (minimal)</li>
+                <li>HTML5 form validation (required, email type)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Mock API for demo purposes
+        const mockSubmit = (data) => {
+            return new Promise((resolve) => {
+                console.log('Form data submitted:', data);
+                setTimeout(() => {
+                    resolve({ ok: true });
+                }, 1500);
+            });
+        };
+
+        function ContactForm() {
+            const [status, setStatus] = useState('idle');
+            
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setStatus('submitting');
+                
+                try {
+                    // In production, this would be: fetch('/api/contact', {...})
+                    // For demo, we use a mock function
+                    const formData = Object.fromEntries(new FormData(e.target));
+                    const response = await mockSubmit(formData);
+                    
+                    if (response.ok) {
+                        setStatus('success');
+                        e.target.reset();
+                    } else {
+                        throw new Error();
+                    }
+                } catch {
+                    setStatus('error');
+                }
+            };
+            
+            return (
+                <form onSubmit={handleSubmit}>
+                    <input name="name" placeholder="Your Name" required />
+                    <input name="email" type="email" placeholder="your.email@example.com" required />
+                    <textarea name="message" placeholder="Your message..." required />
+                    <button disabled={status === 'submitting'}>
+                        {status === 'submitting' ? 'Sending...' : 'Send'}
+                    </button>
+                    {status === 'success' && <div role="alert">Thank you!</div>}
+                </form>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<ContactForm />);
+    </script>
+</body>
+</html>

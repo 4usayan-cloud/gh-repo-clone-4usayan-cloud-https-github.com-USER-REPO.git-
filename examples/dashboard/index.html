@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Dashboard Example</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Real-time Dashboard</h1>
+            <p class="subtitle">Auto-refreshing every 30 seconds</p>
+        </header>
+
+        <div class="dashboard">
+            <div class="card">
+                <h2>Active Users</h2>
+                <div class="metric" id="metric1">Loading...</div>
+                <p class="description">Currently online</p>
+            </div>
+
+            <div class="card">
+                <h2>Total Sales</h2>
+                <div class="metric" id="metric2">Loading...</div>
+                <p class="description">Today's revenue</p>
+            </div>
+
+            <div class="card">
+                <h2>Server Status</h2>
+                <div class="metric" id="metric3">Loading...</div>
+                <p class="description">System health</p>
+            </div>
+
+            <div class="card">
+                <h2>Response Time</h2>
+                <div class="metric" id="metric4">Loading...</div>
+                <p class="description">Average latency</p>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <span id="last-update">Last updated: Never</span>
+            <span id="status-indicator" class="status-loading">●</span>
+        </div>
+
+        <div class="info-section">
+            <h3>About This Dashboard</h3>
+            <p>This dashboard demonstrates real-time data fetching using the JavaScript Fetch API.</p>
+            <ul>
+                <li>Auto-refreshes data every 30 seconds</li>
+                <li>Handles errors gracefully</li>
+                <li>Shows loading states</li>
+                <li>Updates dashboard elements dynamically</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

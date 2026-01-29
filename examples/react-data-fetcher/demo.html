@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Data Fetcher - Demo</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .demo-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .info-section ul {
+            line-height: 1.8;
+            color: #666;
+            margin-left: 20px;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>React Data Fetcher</h1>
+            <p>Fetch and display data using React hooks</p>
+        </div>
+
+        <div class="demo-container">
+            <div id="root"></div>
+        </div>
+
+        <div class="info-section">
+            <h3>About This Example</h3>
+            <p>This demonstrates the React data fetching pattern using hooks:</p>
+            <ul>
+                <li>✅ <code>useState</code> for managing component state</li>
+                <li>✅ <code>useEffect</code> for side effects (data fetching)</li>
+                <li>✅ Loading states while fetching</li>
+                <li>✅ Error handling</li>
+                <li>✅ Empty state handling</li>
+                <li>✅ Dynamic rendering of fetched data</li>
+            </ul>
+
+            <div class="code-block">
+                <code>
+import { useState, useEffect } from 'react';<br><br>
+function DataFetcher() {<br>
+&nbsp;&nbsp;const [data, setData] = useState([]);<br><br>
+&nbsp;&nbsp;useEffect(() => {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fetch('/api/data')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(res => res.json())<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(setData);<br>
+&nbsp;&nbsp;}, []);<br><br>
+&nbsp;&nbsp;return (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{data.map(item => (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div key={item.id}&gt;{item.name}&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+&nbsp;&nbsp;);<br>
+}
+                </code>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Mock API simulation
+        const mockApiCall = () => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve([
+                        { id: 1, name: 'Item 1', description: 'First item from API' },
+                        { id: 2, name: 'Item 2', description: 'Second item from API' },
+                        { id: 3, name: 'Item 3', description: 'Third item from API' },
+                        { id: 4, name: 'Item 4', description: 'Fourth item from API' },
+                    ]);
+                }, 1500);
+            });
+        };
+
+        function DataFetcher() {
+            const [data, setData] = useState([]);
+            const [loading, setLoading] = useState(true);
+            const [error, setError] = useState(null);
+
+            useEffect(() => {
+                setLoading(true);
+                setError(null);
+                
+                mockApiCall()
+                    .then(data => {
+                        setData(data);
+                        setLoading(false);
+                    })
+                    .catch(err => {
+                        setError(err.message);
+                        setLoading(false);
+                    });
+            }, []);
+
+            if (loading) {
+                return (
+                    <div style={{ textAlign: 'center', padding: '40px' }}>
+                        <div className="spinner" style={{
+                            border: '4px solid #f3f3f3',
+                            borderTop: '4px solid #667eea',
+                            borderRadius: '50%',
+                            width: '40px',
+                            height: '40px',
+                            margin: '0 auto 20px'
+                        }}></div>
+                        <p>Loading data...</p>
+                    </div>
+                );
+            }
+
+            if (error) {
+                return (
+                    <div style={{
+                        background: '#fee',
+                        border: '1px solid #fcc',
+                        borderRadius: '8px',
+                        padding: '20px'
+                    }}>
+                        <h3 style={{ color: '#c00' }}>Error loading data</h3>
+                        <p>{error}</p>
+                    </div>
+                );
+            }
+
+            return (
+                <div>
+                    <h2 style={{ marginBottom: '20px', color: '#333' }}>
+                        Fetched Data ({data.length} items)
+                    </h2>
+                    <div style={{ display: 'grid', gap: '15px' }}>
+                        {data.map(item => (
+                            <div key={item.id} style={{
+                                background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+                                padding: '20px',
+                                borderRadius: '8px',
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                                transition: 'transform 0.2s',
+                                cursor: 'pointer'
+                            }}
+                            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                            >
+                                <h3 style={{ margin: '0 0 10px 0', color: '#333' }}>{item.name}</h3>
+                                <p style={{ margin: 0, color: '#666' }}>{item.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<DataFetcher />);
+    </script>
+</body>
+</html>
