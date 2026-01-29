@@ -4,6 +4,10 @@ This repository contains comprehensive documentation and guides for Git workflow
 
 ## Documentation
 
+- **[Git Clone Guide](GIT_CLONE_GUIDE.md)** - Complete guide for cloning repositories
+  - HTTPS vs SSH cloning methods
+  - Clone options: shallow clone, specific branch, submodules
+  - Common scenarios and troubleshooting
 - **[Git Setup Guide](GIT_SETUP_GUIDE.md)** - Complete guide for initial repository setup and pushing to remote
   - Initial push workflow: `git remote add origin`, `git branch -M main`, `git push -u origin main`
   - Adding and managing remote repositories
@@ -11,6 +15,23 @@ This repository contains comprehensive documentation and guides for Git workflow
 - **[Git Workflow Guide](GIT_WORKFLOW_GUIDE.md)** - Complete guide for clone → change → add → commit → push workflow
 
 ## Quick Start
+
+### Cloning an Existing Repository
+
+Get a copy of an existing repository:
+
+```bash
+# Clone with HTTPS
+git clone https://github.com/YOUR_USERNAME/REPO_NAME.git
+
+# Or clone with SSH
+git clone git@github.com:YOUR_USERNAME/REPO_NAME.git
+
+# Navigate to the repository
+cd REPO_NAME
+```
+
+See [Git Clone Guide](GIT_CLONE_GUIDE.md) for detailed explanations and options.
 
 ### For New Repositories (Initial Setup)
 
@@ -34,7 +55,7 @@ See [Git Setup Guide](GIT_SETUP_GUIDE.md) for detailed explanations.
 Working with an existing cloned repository:
 
 ```bash
-# 1. Clone a repository
+# 1. Clone a repository (if not already done)
 git clone [repo-url]
 
 # 2. Navigate to the repository
