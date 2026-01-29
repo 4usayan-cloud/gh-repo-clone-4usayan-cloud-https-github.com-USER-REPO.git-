@@ -29,6 +29,13 @@ This repository contains comprehensive documentation and guides for Git workflow
   - Controlled components with React hooks
   - [View Demo](examples/react-contact-form/demo.html) | [Read Documentation](examples/react-contact-form/README.md)
 
+- **[Python Resilience Calculator](examples/python-resilience-calculator/)** - Python mathematical calculator
+  - Calculate resilience as capacity to absorb shocks
+  - Multiple scenario analysis
+  - Normalized resilience index
+  - Comprehensive unit tests
+  - [Read Documentation](examples/python-resilience-calculator/README.md)
+
 ## Quick Start
 
 ### Cloning an Existing Repository
