@@ -50,6 +50,14 @@ This repository contains comprehensive documentation and guides for Git workflow
   - Best practices for React data fetching
   - [View Demo](examples/react-data-fetcher/demo.html) | [Read Documentation](examples/react-data-fetcher/README.md)
 
+- **[Netlify Serverless DB](examples/netlify-serverless-db/)** - Serverless JSON database
+  - Simple JSON-based persistence with serverless functions
+  - GET/POST request handling
+  - File system operations in Node.js
+  - Netlify Functions deployment example
+  - [View Demo](examples/netlify-serverless-db/index.html) | [Read Documentation](examples/netlify-serverless-db/README.md)
+  - [View Demo](examples/react-data-fetcher/demo.html) | [Read Documentation](examples/react-data-fetcher/README.md)
+
 ## Quick Start
 
 ### Cloning an Existing Repository

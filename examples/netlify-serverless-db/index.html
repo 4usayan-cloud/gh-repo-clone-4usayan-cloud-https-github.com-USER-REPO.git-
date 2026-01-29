@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netlify Serverless DB - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .data-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .data-item {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-item h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .data-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .status {
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.loading {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .info-section {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .info-section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .info-section li {
+            margin-bottom: 5px;
+        }
+
+        .code-inline {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Netlify Serverless DB</h1>
+            <p>Simple JSON database with serverless functions</p>
+        </div>
+
+        <div class="card">
+            <h2>Demo Controls</h2>
+            <div class="button-group">
+                <button id="fetch-btn">Fetch Data (GET)</button>
+                <button id="update-btn">Update Data (POST)</button>
+                <button id="reset-btn">Reset to Default</button>
+            </div>
+            <div id="status"></div>
+        </div>
+
+        <div class="card">
+            <h2>Current Data</h2>
+            <div id="data-display" class="data-container">
+                <p style="color: #999; text-align: center;">Click "Fetch Data" to load items</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>About This Example</h2>
+            <div class="info-section">
+                <p>This demonstrates a Netlify serverless function that acts as a simple JSON database.</p>
+                <br>
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>✅ <span class="code-inline">GET</span> requests to read data from JSON file</li>
+                    <li>✅ <span class="code-inline">POST</span> requests to write data to JSON file</li>
+                    <li>✅ File system operations in serverless function</li>
+                    <li>✅ Simple JSON-based persistence</li>
+                    <li>✅ No database required</li>
+                </ul>
+                <br>
+                <p><strong>Note:</strong> This demo uses mock responses. In production, deploy to Netlify to use actual serverless functions.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Function Code</h2>
+            <pre>// functions/db.js
+const fs = require('fs');
+const path = require('path');
+
+exports.handler = async (event) => {
+  const dbPath = path.join(__dirname, 'data.json');
+  
+  if (event.httpMethod === 'GET') {
+    const data = JSON.parse(fs.readFileSync(dbPath));
+    return { statusCode: 200, body: JSON.stringify(data) };
+  }
+  
+  if (event.httpMethod === 'POST') {
+    fs.writeFileSync(dbPath, event.body);
+    return { statusCode: 200, body: 'Updated' };
+  }
+};</pre>
+        </div>
+    </div>
+
+    <script>
+        // Mock data for demo purposes
+        let mockData = {
+            items: [
+                { id: 1, name: "Item 1", description: "First item" },
+                { id: 2, name: "Item 2", description: "Second item" },
+                { id: 3, name: "Item 3", description: "Third item" }
+            ],
+            lastUpdated: new Date().toISOString()
+        };
+
+        const defaultData = JSON.parse(JSON.stringify(mockData));
+
+        // Mock API calls
+        function mockFetch(method, body = null) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    if (method === 'GET') {
+                        resolve({
+                            ok: true,
+                            json: async () => mockData
+                        });
+                    } else if (method === 'POST') {
+                        mockData = JSON.parse(body);
+                        resolve({
+                            ok: true,
+                            text: async () => 'Updated'
+                        });
+                    }
+                }, 500);
+            });
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+
+        function displayData(data) {
+            const container = document.getElementById('data-display');
+            
+            if (!data.items || data.items.length === 0) {
+                container.innerHTML = '<p style="color: #999; text-align: center;">No items found</p>';
+                return;
+            }
+
+            container.innerHTML = data.items.map(item => `
+                <div class="data-item">
+                    <h3>${item.name}</h3>
+                    <p>${item.description}</p>
+                    <small style="color: #999;">ID: ${item.id}</small>
+                </div>
+            `).join('');
+        }
+
+        // Fetch data
+        document.getElementById('fetch-btn').addEventListener('click', async () => {
+            showStatus('Fetching data...', 'loading');
+            
+            try {
+                // In production: const response = await fetch('/.netlify/functions/db');
+                const response = await mockFetch('GET');
+                const data = await response.json();
+                
+                displayData(data);
+                showStatus('Data loaded successfully!', 'success');
+            } catch (error) {
+                showStatus('Error fetching data: ' + error.message, 'error');
+            }
+        });
+
+        // Update data
+        document.getElementById('update-btn').addEventListener('click', async () => {
+            showStatus('Updating data...', 'loading');
+            
+            try {
+                const newItem = {
+                    id: mockData.items.length + 1,
+                    name: `Item ${mockData.items.length + 1}`,
+                    description: `Added at ${new Date().toLocaleTimeString()}`
+                };
+
+                const updatedData = {
+                    items: [...mockData.items, newItem],
+                    lastUpdated: new Date().toISOString()
+                };
+
+                // In production: 
+                // const response = await fetch('/.netlify/functions/db', {
+                //     method: 'POST',
+                //     body: JSON.stringify(updatedData)
+                // });
+                const response = await mockFetch('POST', JSON.stringify(updatedData));
+                
+                if (response.ok) {
+                    displayData(mockData);
+                    showStatus('Data updated successfully!', 'success');
+                } else {
+                    throw new Error('Update failed');
+                }
+            } catch (error) {
+                showStatus('Error updating data: ' + error.message, 'error');
+            }
+        });
+
+        // Reset data
+        document.getElementById('reset-btn').addEventListener('click', async () => {
+            mockData = JSON.parse(JSON.stringify(defaultData));
+            displayData(mockData);
+            showStatus('Data reset to default', 'success');
+        });
+
+        // Initial load
+        displayData(mockData);
+    </script>
+</body>
+</html>
